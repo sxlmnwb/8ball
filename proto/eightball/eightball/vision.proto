@@ -1,0 +1,13 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message Vision {
+  uint64 id = 1;
+  uint64 magicKeyId = 2; 
+  string ecPointX = 3; 
+  string ecPointY = 4; 
+  uint64 summoningId = 5; 
+  string creator = 6;
+}

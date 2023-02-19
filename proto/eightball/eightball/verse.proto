@@ -1,0 +1,17 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message Verse {
+  uint64 id = 1;
+  string fromSpirit = 2; 
+  repeated string toSpirit = 3; 
+  string wireBytes = 4; 
+  bool broadcast = 5; 
+  bool toOld = 6; 
+  bool toOldAndNew = 7; 
+  uint64 magicKeyId = 8; 
+  uint64 summoningId = 9; 
+  string creator = 10;
+}

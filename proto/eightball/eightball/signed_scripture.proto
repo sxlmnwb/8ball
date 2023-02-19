@@ -1,0 +1,12 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message SignedScripture {
+  string index = 1; 
+  string signature = 2; 
+  string btcAddress = 3; 
+  string magicKeyId = 4; 
+}
+

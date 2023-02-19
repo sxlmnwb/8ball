@@ -1,0 +1,14 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message SpiritConjuringPoems {
+  uint64 id = 1;
+  uint64 magicKeyId = 2; 
+  uint64 blockHeight = 3; 
+  string poem = 4; 
+  uint64 conjuringId = 5; 
+  uint64 ueblPower = 6; 
+  string creator = 7;
+}

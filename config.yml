@@ -1,0 +1,51 @@
+version: 1
+build:
+  main: cmd/eightballd
+accounts:
+- name: alice
+  coins:
+  - 10000000000uebl
+- name: bob
+  coins:
+  - 10000000000uebl
+- name: charlie
+  coins:
+  - 10000000000uebl
+client:
+  openapi:
+    path: docs/static/openapi.yml
+validators:
+- name: alice
+  bonded: 9900000000uebl
+genesis:
+  app_state:
+    bank:
+      denom_metadata:
+        - description: "The native token of 8ball"
+          denom_units:
+            - denom: "uebl"
+              exponent: 0
+              aliases: 
+                - "microeball"
+            - denom: "mebl"
+              exponent: 3
+              aliases: 
+                - "milliebl"
+            - denom: "ebl"
+              exponent: 6
+              aliases: 
+                - "ebl"
+          base: "uebl"
+          display: "ebl"
+          name: "EBL"
+          symbol: "EBL"
+    mint:
+      params:
+        mint_denom: "uebl"
+        inflation_rate_change: "0.000000000000000000"
+        inflation_max: "0.000000000000000000"
+        inflation_min: "0.000000000000000000"
+        goal_bonded: "0.010000000000000000"
+    staking:
+      params:
+        bond_denom: "uebl"

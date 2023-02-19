@@ -1,0 +1,13 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message ScriptureSignatureShare {
+  uint64 id = 1;
+  string scriptureIndex = 2; 
+  string shareData = 3; 
+  uint64 magicKeyId = 4; 
+  string pubKey = 5; 
+  string creator = 6;
+}

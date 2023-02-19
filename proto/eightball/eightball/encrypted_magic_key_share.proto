@@ -1,0 +1,11 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message EncryptedMagicKeyShare {
+  string index = 1; 
+  string data = 2; 
+  string creator = 3;
+}
+

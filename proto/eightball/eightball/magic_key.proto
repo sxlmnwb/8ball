@@ -1,0 +1,16 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message MagicKey {
+  uint64 id = 1;
+  string ecPointX = 2; 
+  string ecPointY = 3; 
+  uint64 blockHeight = 6;
+  string bitcoinAlias = 7;
+  string ethereumAlias = 8;
+  string tronAlias = 9;
+  string zclassicAlias = 10;
+  string eightballAlias = 11;
+}

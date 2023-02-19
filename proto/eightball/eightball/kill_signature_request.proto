@@ -1,0 +1,11 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message KillSignatureRequest {
+  uint64 id = 1;
+  uint64 height = 2; 
+  string metadata = 3; 
+  string creator = 4;
+}

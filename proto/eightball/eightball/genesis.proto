@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package eightball.eightball;
+
+import "gogoproto/gogo.proto";
+import "eightball/eightball/params.proto";
+import "eightball/eightball/magic_key.proto";
+import "eightball/eightball/magic_key_summoning.proto";
+import "eightball/eightball/high_council.proto";
+import "eightball/eightball/current_magic_key.proto";
+import "eightball/eightball/high_council_conjurings.proto";
+import "eightball/eightball/spirit_conjuring_poems.proto";
+import "eightball/eightball/verse.proto";
+import "eightball/eightball/vision.proto";
+import "eightball/eightball/message.proto";
+import "eightball/eightball/signature_request.proto";
+import "eightball/eightball/signature_share.proto";
+import "eightball/eightball/signed_message.proto";
+import "eightball/eightball/meditation_summoning.proto";
+import "eightball/eightball/meditation.proto";
+import "eightball/eightball/scripture.proto";
+import "eightball/eightball/scripture_signature_request.proto";
+import "eightball/eightball/scripture_signature_share.proto";
+import "eightball/eightball/signed_scripture.proto";
+import "eightball/eightball/signed_scripture_list.proto";
+import "eightball/eightball/blessing.proto";
+import "eightball/eightball/blessing_receipt.proto";
+import "eightball/eightball/imploring.proto";
+import "eightball/eightball/kill_conjuring.proto";
+import "eightball/eightball/kill_imploring.proto";
+import "eightball/eightball/kill_meditation_summoning.proto";
+import "eightball/eightball/kill_magic_key_summoning.proto";
+import "eightball/eightball/kill_scripture_signature_request.proto";
+import "eightball/eightball/kill_signature_request.proto";
+import "eightball/eightball/encrypted_magic_key_share.proto";
+import "eightball/eightball/encrypted_pre_sign.proto";
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "eightball/x/eightball/types";
+
+// GenesisState defines the eightball module's genesis state.
+message GenesisState {
+           Params                    params                         =  1 [(gogoproto.nullable) = false];
+  repeated MagicKey                  magicKeyList                   =  3 [(gogoproto.nullable) = false];
+           uint64                    magicKeyCount                  =  4;
+  repeated MagicKeySummoning         magicKeySummoningList          =  5 [(gogoproto.nullable) = false];
+           uint64                    magicKeySummoningCount         =  6;
+  repeated HighCouncil               highCouncilList                =  7 [(gogoproto.nullable) = false];
+           uint64                    highCouncilCount               =  8;
+           CurrentMagicKey           currentMagicKey                =  9;
+  repeated HighCouncilConjurings     highCouncilConjuringsList      = 10 [(gogoproto.nullable) = false];
+           uint64                    highCouncilConjuringsCount     = 11;
+  repeated SpiritConjuringPoems      spiritConjuringPoemsList       = 12 [(gogoproto.nullable) = false];
+           uint64                    spiritConjuringPoemsCount      = 13;
+  repeated Verse                     verseList                      = 14 [(gogoproto.nullable) = false];
+           uint64                    verseCount                     = 15;
+  repeated Vision                    visionList                     = 16 [(gogoproto.nullable) = false];
+           uint64                    visionCount                    = 17;
+  repeated Message                   messageList                    = 18 [(gogoproto.nullable) = false];
+           uint64                    messageCount                   = 19;
+  repeated SignatureRequest          signatureRequestList           = 20 [(gogoproto.nullable) = false];
+           uint64                    signatureRequestCount          = 21;
+  repeated SignatureShare            signatureShareList             = 22 [(gogoproto.nullable) = false];
+           uint64                    signatureShareCount            = 23;
+  repeated SignedMessage             signedMessageList              = 24 [(gogoproto.nullable) = false];
+           uint64                    signedMessageCount             = 25;
+  repeated MeditationSummoning       meditationSummoningList        = 26 [(gogoproto.nullable) = false];
+           uint64                    meditationSummoningCount       = 27;
+  repeated Meditation                meditationList                 = 28 [(gogoproto.nullable) = false];
+           uint64                    meditationCount                = 29;
+  repeated Scripture                 scriptureList                  = 30 [(gogoproto.nullable) = false];
+  repeated ScriptureSignatureRequest scriptureSignatureRequestList  = 31 [(gogoproto.nullable) = false];
+           uint64                    scriptureSignatureRequestCount = 32;
+  repeated ScriptureSignatureShare   scriptureSignatureShareList    = 33 [(gogoproto.nullable) = false];
+           uint64                    scriptureSignatureShareCount   = 34;
+  repeated SignedScripture           signedScriptureList            = 35 [(gogoproto.nullable) = false];
+  repeated SignedScriptureList       signedScriptureListList        = 36 [(gogoproto.nullable) = false];
+           uint64                    signedScriptureListCount       = 37;
+  
+  // this line is used by starport scaffolding # genesis/proto/state
+  repeated Blessing                      blessingList                       = 38 [(gogoproto.nullable) = false];
+           uint64                        blessingCount                      = 39;
+  repeated BlessingReceipt               blessingReceiptList                = 40 [(gogoproto.nullable) = false];
+  repeated Imploring                     imploringList                      = 41 [(gogoproto.nullable) = false];
+           uint64                        imploringCount                     = 42;
+  repeated KillConjuring                 killConjuringList                  = 43 [(gogoproto.nullable) = false];
+           uint64                        killConjuringCount                 = 44;
+  repeated KillImploring                 killImploringList                  = 45 [(gogoproto.nullable) = false];
+           uint64                        killImploringCount                 = 46;
+  repeated KillMeditationSummoning       killMeditationSummoningList        = 47 [(gogoproto.nullable) = false];
+           uint64                        killMeditationSummoningCount       = 48;
+  repeated KillMagicKeySummoning         killMagicKeySummoningList          = 49 [(gogoproto.nullable) = false];
+           uint64                        killMagicKeySummoningCount         = 50;
+  repeated KillScriptureSignatureRequest killScriptureSignatureRequestList  = 51 [(gogoproto.nullable) = false];
+           uint64                        killScriptureSignatureRequestCount = 52;
+  repeated KillSignatureRequest          killSignatureRequestList           = 53 [(gogoproto.nullable) = false];
+           uint64                        killSignatureRequestCount          = 54;
+  repeated EncryptedMagicKeyShare        encryptedMagicKeyShareList         = 55 [(gogoproto.nullable) = false];
+  repeated EncryptedPreSign              encryptedPreSignList               = 56 [(gogoproto.nullable) = false];
+}
+

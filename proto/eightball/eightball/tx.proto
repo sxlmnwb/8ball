@@ -1,0 +1,378 @@
+syntax = "proto3";
+
+package eightball.eightball;
+
+import "eightball/eightball/magic_key.proto";
+import "eightball/eightball/current_magic_key.proto";
+import "eightball/eightball/spirit_conjuring_poems.proto";
+import "eightball/eightball/verse.proto";
+import "eightball/eightball/vision.proto";
+import "eightball/eightball/message.proto";
+import "eightball/eightball/signature_request.proto";
+import "eightball/eightball/signature_share.proto";
+import "eightball/eightball/signed_message.proto";
+import "eightball/eightball/meditation_summoning.proto";
+import "eightball/eightball/meditation.proto";
+import "eightball/eightball/scripture.proto";
+import "eightball/eightball/scripture_signature_request.proto";
+import "eightball/eightball/scripture_signature_share.proto";
+import "eightball/eightball/signed_scripture.proto";
+import "eightball/eightball/signed_scripture_list.proto";
+import "eightball/eightball/blessing.proto";
+import "eightball/eightball/kill_conjuring.proto";
+import "eightball/eightball/kill_imploring.proto";
+import "eightball/eightball/kill_meditation_summoning.proto";
+import "eightball/eightball/kill_magic_key_summoning.proto";
+import "eightball/eightball/kill_scripture_signature_request.proto";
+import "eightball/eightball/kill_signature_request.proto";
+import "eightball/eightball/encrypted_magic_key_share.proto";
+import "eightball/eightball/encrypted_pre_sign.proto";
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "eightball/x/eightball/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateMagicKey                  (MsgCreateMagicKey                 ) returns (MsgCreateMagicKeyResponse                 );
+  rpc CreateSpiritConjuringPoems      (MsgCreateSpiritConjuringPoems     ) returns (MsgCreateSpiritConjuringPoemsResponse     );
+  rpc FinalizeConjuring               (MsgFinalizeConjuring              ) returns (MsgFinalizeConjuringResponse              );
+  rpc CreateVerse                     (MsgCreateVerse                    ) returns (MsgCreateVerseResponse                    );
+  rpc CreateVision                    (MsgCreateVision                   ) returns (MsgCreateVisionResponse                   );
+  rpc CreateMessage                   (MsgCreateMessage                  ) returns (MsgCreateMessageResponse                  );
+  rpc CreateSignatureRequest          (MsgCreateSignatureRequest         ) returns (MsgCreateSignatureRequestResponse         );
+  rpc CreateSignatureShare            (MsgCreateSignatureShare           ) returns (MsgCreateSignatureShareResponse           );
+  rpc CreateSignedMessage             (MsgCreateSignedMessage            ) returns (MsgCreateSignedMessageResponse            );
+  rpc CreateMeditation                (MsgCreateMeditation               ) returns (MsgCreateMeditationResponse               );
+  rpc CreateScripture                 (MsgCreateScripture                ) returns (MsgCreateScriptureResponse                );
+  rpc CreateScriptureSignatureRequest (MsgCreateScriptureSignatureRequest) returns (MsgCreateScriptureSignatureRequestResponse);
+  rpc CreateScriptureSignatureShare   (MsgCreateScriptureSignatureShare  ) returns (MsgCreateScriptureSignatureShareResponse  );
+  rpc CreateSignedScripture           (MsgCreateSignedScripture          ) returns (MsgCreateSignedScriptureResponse          );
+  rpc CreateSignedScriptureList       (MsgCreateSignedScriptureList      ) returns (MsgCreateSignedScriptureListResponse      );
+  
+  // this line is used by starport scaffolding # proto/tx/rpc
+  rpc CreateBlessing                      (MsgCreateBlessing                     ) returns (MsgCreateBlessingResponse                     );
+  rpc CreateKillConjuring                 (MsgCreateKillConjuring                ) returns (MsgCreateKillConjuringResponse                );
+  rpc CreateKillImploring                 (MsgCreateKillImploring                ) returns (MsgCreateKillImploringResponse                );
+  rpc CreateKillMeditationSummoning       (MsgCreateKillMeditationSummoning      ) returns (MsgCreateKillMeditationSummoningResponse      );
+  rpc CreateKillMagicKeySummoning         (MsgCreateKillMagicKeySummoning        ) returns (MsgCreateKillMagicKeySummoningResponse        );
+  rpc CreateKillScriptureSignatureRequest (MsgCreateKillScriptureSignatureRequest) returns (MsgCreateKillScriptureSignatureRequestResponse);
+  rpc CreateKillSignatureRequest          (MsgCreateKillSignatureRequest         ) returns (MsgCreateKillSignatureRequestResponse         );
+  rpc CreateEncryptedMagicKeyShare        (MsgCreateEncryptedMagicKeyShare       ) returns (MsgCreateEncryptedMagicKeyShareResponse       );
+  rpc DeleteEncryptedMagicKeyShare        (MsgDeleteEncryptedMagicKeyShare       ) returns (MsgDeleteEncryptedMagicKeyShareResponse       );
+  rpc CreateEncryptedPreSign              (MsgCreateEncryptedPreSign             ) returns (MsgCreateEncryptedPreSignResponse             );
+  rpc DeleteEncryptedPreSign              (MsgDeleteEncryptedPreSign             ) returns (MsgDeleteEncryptedPreSignResponse             );
+}
+message MsgCreateMagicKey {
+  string creator = 1;
+}
+
+message MsgCreateMagicKeyResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateSpiritConjuringPoems {
+  string creator     = 1;
+  uint64 magicKeyId  = 2;
+  uint64 blockHeight = 3;
+  string poem        = 4;
+  uint64 conjuringId = 5;
+  uint64 ueblPower   = 6;
+}
+
+message MsgCreateSpiritConjuringPoemsResponse {
+  uint64 id = 1;
+}
+
+message MsgFinalizeConjuring {
+  string creator     = 1;
+  uint64 conjuringId = 2;
+}
+
+message MsgFinalizeConjuringResponse {}
+
+message MsgCreateVerse {
+           string creator     = 1;
+           string fromSpirit  = 2;
+  repeated string toSpirit    = 3;
+           string wireBytes   = 4;
+           bool   broadcast   = 5;
+           bool   toOld       = 6;
+           bool   toOldAndNew = 7;
+           uint64 magicKeyId  = 8;
+           uint64 summoningId = 9;
+}
+
+message MsgCreateVerseResponse {
+  uint64 id = 1;
+}
+
+message MsgDeleteVerse {
+  string creator    = 1;
+  uint64 magicKeyId = 2;
+  uint64 id         = 3;
+}
+
+message MsgDeleteVerseResponse {}
+
+message MsgCreateVision {
+  string creator     = 1;
+  uint64 magicKeyId  = 2;
+  string ecPointX    = 3;
+  string ecPointY    = 4;
+  uint64 summoningId = 5;
+}
+
+message MsgCreateVisionResponse {
+  uint64 id = 1;
+}
+
+message MsgDeleteVision {
+  string creator    = 1;
+  uint64 magicKeyId = 2;
+  uint64 id         = 3;
+}
+
+message MsgDeleteVisionResponse {}
+
+message MsgCreateMessage {
+  string creator = 1;
+  string body    = 2;
+}
+
+message MsgCreateMessageResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateSignatureRequest {
+  string creator   = 1;
+  uint64 messageId = 2;
+}
+
+message MsgCreateSignatureRequestResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateSignatureRequest {
+  string creator   = 1;
+  uint64 id        = 2;
+  uint64 messageId = 3;
+}
+
+message MsgUpdateSignatureRequestResponse {}
+
+message MsgDeleteSignatureRequest {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteSignatureRequestResponse {}
+
+message MsgCreateSignatureShare {
+  string creator    = 1;
+  uint64 messageId  = 2;
+  string shareData  = 3;
+  uint64 magicKeyId = 4;
+  string pubKey     = 5;
+}
+
+message MsgCreateSignatureShareResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateSignedMessage {
+  string creator        = 1;
+  string body           = 2;
+  string signature      = 3;
+  string bitcoinAddress = 4;
+  uint64 messageId      = 5;
+  uint64 sigRequestId   = 6;
+  uint64 magicKeyId     = 7;
+}
+
+message MsgCreateSignedMessageResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateMeditationSummoning {
+  string creator    = 1;
+  uint64 magicKeyId = 2;
+}
+
+message MsgCreateMeditationSummoningResponse {
+  uint64 id = 1;
+}
+
+message MsgDeleteMeditationSummoning {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteMeditationSummoningResponse {}
+
+message MsgCreateMeditation {
+           string creator     = 1;
+           string fromSpirit  = 2;
+  repeated string toSpirit    = 3;
+           string wireBytes   = 4;
+           bool   broadcast   = 5;
+           bool   toOld       = 6;
+           bool   toOldAndNew = 7;
+           uint64 magicKeyId  = 8;
+           uint64 summoningId = 9;
+}
+
+message MsgCreateMeditationResponse {
+  uint64 id = 1;
+}
+
+message MsgDeleteMeditation {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteMeditationResponse {}
+
+message MsgCreateScripture {
+  string witness  = 1;
+  string index    = 2;
+  string hash     = 3;
+  string location = 4;
+  string address  = 5;
+  string alias    = 6;
+  string value    = 7;
+}
+
+message MsgCreateScriptureResponse {}
+
+message MsgCreateScriptureSignatureRequest {
+  string creator        = 1;
+  string scriptureIndex = 2;
+}
+
+message MsgCreateScriptureSignatureRequestResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateScriptureSignatureShare {
+  string creator        = 1;
+  string scriptureIndex = 2;
+  string shareData      = 3;
+  uint64 magicKeyId     = 4;
+  string pubKey         = 5;
+}
+
+message MsgCreateScriptureSignatureShareResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateSignedScripture {
+  string witness      = 1;
+  string index        = 2;
+  string signature    = 3;
+  string btcAddress   = 4;
+  string magicKeyId   = 5;
+  uint64 sigRequestId = 6;
+}
+
+message MsgCreateSignedScriptureResponse {}
+
+message MsgCreateSignedScriptureList {
+  string creator        = 1;
+  string scriptureIndex = 2;
+}
+
+message MsgCreateSignedScriptureListResponse {
+  uint64 id = 1;
+}
+
+// this line is used by starport scaffolding # proto/tx/message
+message MsgCreateBlessing {
+  string creator = 1;
+  string index   = 2;
+}
+
+message MsgCreateBlessingResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillConjuring {
+  string creator  = 1;
+  uint64 height   = 2;
+  string metadata = 3;
+}
+
+message MsgCreateKillConjuringResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillImploring {
+  string creator = 1;
+}
+
+message MsgCreateKillImploringResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillMeditationSummoning {
+  string creator = 1;
+}
+
+message MsgCreateKillMeditationSummoningResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillMagicKeySummoning {
+  string creator = 1;
+}
+
+message MsgCreateKillMagicKeySummoningResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillScriptureSignatureRequest {
+  string creator = 1;
+}
+
+message MsgCreateKillScriptureSignatureRequestResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateKillSignatureRequest {
+  string creator = 1;
+}
+
+message MsgCreateKillSignatureRequestResponse {
+  uint64 id = 1;
+}
+
+message MsgCreateEncryptedMagicKeyShare {
+  string creator = 1;
+  string magicKeyId = 2;
+  string data    = 3;
+}
+
+message MsgCreateEncryptedMagicKeyShareResponse {}
+
+message MsgDeleteEncryptedMagicKeyShare {
+  string creator = 1;
+  string magicKeyId   = 2;
+}
+
+message MsgDeleteEncryptedMagicKeyShareResponse {}
+
+message MsgCreateEncryptedPreSign {
+  string creator = 1;
+  string magicKeyId   = 2;
+  string data    = 3;
+}
+
+message MsgCreateEncryptedPreSignResponse {}
+
+message MsgDeleteEncryptedPreSign {
+  string creator = 1;
+  string magicKeyId   = 2;
+}
+
+message MsgDeleteEncryptedPreSignResponse {}
+

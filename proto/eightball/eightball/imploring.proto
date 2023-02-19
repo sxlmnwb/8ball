@@ -1,0 +1,11 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message Imploring {
+  uint64 id = 1;
+  string index = 2; 
+  uint64 height = 3; 
+  
+}

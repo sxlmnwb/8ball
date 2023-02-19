@@ -1,0 +1,10 @@
+syntax = "proto3";
+package eightball.eightball;
+
+option go_package = "eightball/x/eightball/types";
+
+message BlessingReceipt {
+  string index = 1; 
+  uint64 height = 2; 
+}
+

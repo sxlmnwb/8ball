@@ -1,0 +1,954 @@
+syntax = "proto3";
+
+package eightball.eightball;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "eightball/eightball/params.proto";
+import "eightball/eightball/magic_key.proto";
+import "eightball/eightball/magic_key_summoning.proto";
+import "eightball/eightball/high_council.proto";
+import "eightball/eightball/current_magic_key.proto";
+import "eightball/eightball/high_council_conjurings.proto";
+import "eightball/eightball/spirit_conjuring_poems.proto";
+import "eightball/eightball/verse.proto";
+import "eightball/eightball/vision.proto";
+import "eightball/eightball/message.proto";
+import "eightball/eightball/signature_request.proto";
+import "eightball/eightball/signature_share.proto";
+import "eightball/eightball/signed_message.proto";
+import "eightball/eightball/meditation_summoning.proto";
+import "eightball/eightball/meditation.proto";
+import "eightball/eightball/scripture.proto";
+import "eightball/eightball/scripture_signature_request.proto";
+import "eightball/eightball/scripture_signature_share.proto";
+import "eightball/eightball/signed_scripture.proto";
+import "eightball/eightball/signed_scripture_list.proto";
+import "eightball/eightball/blessing.proto";
+import "eightball/eightball/blessing_receipt.proto";
+import "eightball/eightball/imploring.proto";
+import "eightball/eightball/kill_conjuring.proto";
+import "eightball/eightball/kill_imploring.proto";
+import "eightball/eightball/kill_meditation_summoning.proto";
+import "eightball/eightball/kill_magic_key_summoning.proto";
+import "eightball/eightball/kill_scripture_signature_request.proto";
+import "eightball/eightball/kill_signature_request.proto";
+import "eightball/eightball/encrypted_magic_key_share.proto";
+import "eightball/eightball/encrypted_pre_sign.proto";
+
+// this line is used by starport scaffolding # 1
+
+option go_package = "eightball/x/eightball/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/eightball/eightball/params";
+  
+  }
+  
+  // Queries a MagicKey by id.
+  rpc MagicKey (QueryGetMagicKeyRequest) returns (QueryGetMagicKeyResponse) {
+    option (google.api.http).get = "/eightball/eightball/magic_key/{id}";
+  
+  }
+  
+  // Queries a list of MagicKey items.
+  rpc MagicKeyAll (QueryAllMagicKeyRequest) returns (QueryAllMagicKeyResponse) {
+    option (google.api.http).get = "/eightball/eightball/magic_key";
+  
+  }
+  
+  // Queries a MagicKeySummoning by id.
+  rpc MagicKeySummoning (QueryGetMagicKeySummoningRequest) returns (QueryGetMagicKeySummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/magic_key_summoning/{id}";
+  
+  }
+  
+  // Queries a list of MagicKeySummoning items.
+  rpc MagicKeySummoningAll (QueryAllMagicKeySummoningRequest) returns (QueryAllMagicKeySummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/magic_key_summoning";
+  
+  }
+  
+  // Queries a HighCouncil by id.
+  rpc HighCouncil (QueryGetHighCouncilRequest) returns (QueryGetHighCouncilResponse) {
+    option (google.api.http).get = "/eightball/eightball/high_council/{id}";
+  
+  }
+  
+  // Queries a list of HighCouncil items.
+  rpc HighCouncilAll (QueryAllHighCouncilRequest) returns (QueryAllHighCouncilResponse) {
+    option (google.api.http).get = "/eightball/eightball/high_council";
+  
+  }
+  
+  // Queries a CurrentMagicKey by index.
+  rpc CurrentMagicKey (QueryGetCurrentMagicKeyRequest) returns (QueryGetCurrentMagicKeyResponse) {
+    option (google.api.http).get = "/eightball/eightball/current_magic_key";
+  
+  }
+  
+  // Queries a HighCouncilConjurings by id.
+  rpc HighCouncilConjurings (QueryGetHighCouncilConjuringsRequest) returns (QueryGetHighCouncilConjuringsResponse) {
+    option (google.api.http).get = "/eightball/eightball/high_council_conjurings/{id}";
+  
+  }
+  
+  // Queries a list of HighCouncilConjurings items.
+  rpc HighCouncilConjuringsAll (QueryAllHighCouncilConjuringsRequest) returns (QueryAllHighCouncilConjuringsResponse) {
+    option (google.api.http).get = "/eightball/eightball/high_council_conjurings";
+  
+  }
+  
+  // Queries a SpiritConjuringPoems by id.
+  rpc SpiritConjuringPoems (QueryGetSpiritConjuringPoemsRequest) returns (QueryGetSpiritConjuringPoemsResponse) {
+    option (google.api.http).get = "/eightball/eightball/spirit_conjuring_poems/{id}";
+  
+  }
+  
+  // Queries a list of SpiritConjuringPoems items.
+  rpc SpiritConjuringPoemsAll (QueryAllSpiritConjuringPoemsRequest) returns (QueryAllSpiritConjuringPoemsResponse) {
+    option (google.api.http).get = "/eightball/eightball/spirit_conjuring_poems";
+  
+  }
+  
+  // Queries a Verse by id.
+  rpc Verse (QueryGetVerseRequest) returns (QueryGetVerseResponse) {
+    option (google.api.http).get = "/eightball/eightball/verse/{id}";
+  
+  }
+  
+  // Queries a list of Verse items.
+  rpc VerseAll (QueryAllVerseRequest) returns (QueryAllVerseResponse) {
+    option (google.api.http).get = "/eightball/eightball/verse";
+  
+  }
+  
+  // Queries a list of VerseCount items.
+  rpc VerseCount (QueryVerseCountRequest) returns (QueryVerseCountResponse) {
+    option (google.api.http).get = "/eightball/eightball/verse_count/{magicKeyId}";
+  
+  }
+  
+  // Queries a list of MagicKeyCount items.
+  rpc MagicKeyCount (QueryMagicKeyCountRequest) returns (QueryMagicKeyCountResponse) {
+    option (google.api.http).get = "/eightball/eightball/magic_key_count";
+  
+  }
+  
+  // Queries a Vision by id.
+  rpc Vision (QueryGetVisionRequest) returns (QueryGetVisionResponse) {
+    option (google.api.http).get = "/eightball/eightball/vision/{id}";
+  
+  }
+  
+  // Queries a list of Vision items.
+  rpc VisionAll (QueryAllVisionRequest) returns (QueryAllVisionResponse) {
+    option (google.api.http).get = "/eightball/eightball/vision";
+  
+  }
+  
+  // Queries a Message by id.
+  rpc Message (QueryGetMessageRequest) returns (QueryGetMessageResponse) {
+    option (google.api.http).get = "/eightball/eightball/message/{id}";
+  
+  }
+  
+  // Queries a list of Message items.
+  rpc MessageAll (QueryAllMessageRequest) returns (QueryAllMessageResponse) {
+    option (google.api.http).get = "/eightball/eightball/message";
+  
+  }
+  
+  // Queries a SignatureRequest by id.
+  rpc SignatureRequest (QueryGetSignatureRequestRequest) returns (QueryGetSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/signature_request/{id}";
+  
+  }
+  
+  // Queries a list of SignatureRequest items.
+  rpc SignatureRequestAll (QueryAllSignatureRequestRequest) returns (QueryAllSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/signature_request";
+  
+  }
+  
+  // Queries a SignatureShare by id.
+  rpc SignatureShare (QueryGetSignatureShareRequest) returns (QueryGetSignatureShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/signature_share/{id}";
+  
+  }
+  
+  // Queries a list of SignatureShare items.
+  rpc SignatureShareAll (QueryAllSignatureShareRequest) returns (QueryAllSignatureShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/signature_share";
+  
+  }
+  
+  // Queries a SignedMessage by id.
+  rpc SignedMessage (QueryGetSignedMessageRequest) returns (QueryGetSignedMessageResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_message/{id}";
+  
+  }
+  
+  // Queries a list of SignedMessage items.
+  rpc SignedMessageAll (QueryAllSignedMessageRequest) returns (QueryAllSignedMessageResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_message";
+  
+  }
+  
+  // Queries a MeditationSummoning by id.
+  rpc MeditationSummoning (QueryGetMeditationSummoningRequest) returns (QueryGetMeditationSummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/meditation_summoning/{id}";
+  
+  }
+  
+  // Queries a list of MeditationSummoning items.
+  rpc MeditationSummoningAll (QueryAllMeditationSummoningRequest) returns (QueryAllMeditationSummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/meditation_summoning";
+  
+  }
+  
+  // Queries a Meditation by id.
+  rpc Meditation (QueryGetMeditationRequest) returns (QueryGetMeditationResponse) {
+    option (google.api.http).get = "/eightball/eightball/meditation/{id}";
+  
+  }
+  
+  // Queries a list of Meditation items.
+  rpc MeditationAll (QueryAllMeditationRequest) returns (QueryAllMeditationResponse) {
+    option (google.api.http).get = "/eightball/eightball/meditation";
+  
+  }
+  
+  // Queries a list of MeditationCount items.
+  rpc MeditationCount (QueryMeditationCountRequest) returns (QueryMeditationCountResponse) {
+    option (google.api.http).get = "/eightball/eightball/meditation_count/{magicKeyId}";
+  
+  }
+  
+  // Queries a Scripture by index.
+  rpc Scripture (QueryGetScriptureRequest) returns (QueryGetScriptureResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture/{index}";
+  
+  }
+  
+  // Queries a list of Scripture items.
+  rpc ScriptureAll (QueryAllScriptureRequest) returns (QueryAllScriptureResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture";
+  
+  }
+  
+  // Queries a ScriptureSignatureRequest by id.
+  rpc ScriptureSignatureRequest (QueryGetScriptureSignatureRequestRequest) returns (QueryGetScriptureSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture_signature_request/{id}";
+  
+  }
+  
+  // Queries a list of ScriptureSignatureRequest items.
+  rpc ScriptureSignatureRequestAll (QueryAllScriptureSignatureRequestRequest) returns (QueryAllScriptureSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture_signature_request";
+  
+  }
+  
+  // Queries a ScriptureSignatureShare by id.
+  rpc ScriptureSignatureShare (QueryGetScriptureSignatureShareRequest) returns (QueryGetScriptureSignatureShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture_signature_share/{id}";
+  
+  }
+  
+  // Queries a list of ScriptureSignatureShare items.
+  rpc ScriptureSignatureShareAll (QueryAllScriptureSignatureShareRequest) returns (QueryAllScriptureSignatureShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/scripture_signature_share";
+  
+  }
+  
+  // Queries a SignedScripture by index.
+  rpc SignedScripture (QueryGetSignedScriptureRequest) returns (QueryGetSignedScriptureResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_scripture/{index}";
+  
+  }
+  
+  // Queries a list of SignedScripture items.
+  rpc SignedScriptureAll (QueryAllSignedScriptureRequest) returns (QueryAllSignedScriptureResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_scripture";
+  
+  }
+  
+  // Queries a SignedScriptureList by id.
+  rpc SignedScriptureList (QueryGetSignedScriptureListRequest) returns (QueryGetSignedScriptureListResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_scripture_list/{id}";
+  
+  }
+  
+  // Queries a list of SignedScriptureList items.
+  rpc SignedScriptureListAll (QueryAllSignedScriptureListRequest) returns (QueryAllSignedScriptureListResponse) {
+    option (google.api.http).get = "/eightball/eightball/signed_scripture_list";
+  
+  }
+
+  // this line is used by starport scaffolding # 2
+  
+  // Queries a list of Blessing items.
+  rpc Blessing    (QueryGetBlessingRequest) returns (QueryGetBlessingResponse) {
+    option (google.api.http).get = "/eightball/eightball/blessing/{id}";
+  
+  }
+  rpc BlessingAll (QueryAllBlessingRequest) returns (QueryAllBlessingResponse) {
+    option (google.api.http).get = "/eightball/eightball/blessing";
+  
+  }
+  
+  // Queries a list of BlessingReceipt items.
+  rpc BlessingReceipt    (QueryGetBlessingReceiptRequest) returns (QueryGetBlessingReceiptResponse) {
+    option (google.api.http).get = "/eightball/eightball/blessing_receipt/{index}";
+  
+  }
+  rpc BlessingReceiptAll (QueryAllBlessingReceiptRequest) returns (QueryAllBlessingReceiptResponse) {
+    option (google.api.http).get = "/eightball/eightball/blessing_receipt";
+  
+  }
+  
+  // Queries a list of Imploring items.
+  rpc Imploring    (QueryGetImploringRequest) returns (QueryGetImploringResponse) {
+    option (google.api.http).get = "/eightball/eightball/imploring/{id}";
+  
+  }
+  rpc ImploringAll (QueryAllImploringRequest) returns (QueryAllImploringResponse) {
+    option (google.api.http).get = "/eightball/eightball/imploring";
+  
+  }
+  
+  // Queries a list of KillConjuring items.
+  rpc KillConjuring    (QueryGetKillConjuringRequest) returns (QueryGetKillConjuringResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_conjuring/{id}";
+  
+  }
+  rpc KillConjuringAll (QueryAllKillConjuringRequest) returns (QueryAllKillConjuringResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_conjuring";
+  
+  }
+  
+  // Queries a list of KillImploring items.
+  rpc KillImploring    (QueryGetKillImploringRequest) returns (QueryGetKillImploringResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_imploring/{id}";
+  
+  }
+  rpc KillImploringAll (QueryAllKillImploringRequest) returns (QueryAllKillImploringResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_imploring";
+  
+  }
+  
+  // Queries a list of KillMeditationSummoning items.
+  rpc KillMeditationSummoning    (QueryGetKillMeditationSummoningRequest) returns (QueryGetKillMeditationSummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_meditation_summoning/{id}";
+  
+  }
+  rpc KillMeditationSummoningAll (QueryAllKillMeditationSummoningRequest) returns (QueryAllKillMeditationSummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_meditation_summoning";
+  
+  }
+  
+  // Queries a list of KillMagicKeySummoning items.
+  rpc KillMagicKeySummoning    (QueryGetKillMagicKeySummoningRequest) returns (QueryGetKillMagicKeySummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_magic_key_summoning/{id}";
+  
+  }
+  rpc KillMagicKeySummoningAll (QueryAllKillMagicKeySummoningRequest) returns (QueryAllKillMagicKeySummoningResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_magic_key_summoning";
+  
+  }
+  
+  // Queries a list of KillScriptureSignatureRequest items.
+  rpc KillScriptureSignatureRequest    (QueryGetKillScriptureSignatureRequestRequest) returns (QueryGetKillScriptureSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_scripture_signature_request/{id}";
+  
+  }
+  rpc KillScriptureSignatureRequestAll (QueryAllKillScriptureSignatureRequestRequest) returns (QueryAllKillScriptureSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_scripture_signature_request";
+  
+  }
+  
+  // Queries a list of KillSignatureRequest items.
+  rpc KillSignatureRequest    (QueryGetKillSignatureRequestRequest) returns (QueryGetKillSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_signature_request/{id}";
+  
+  }
+  rpc KillSignatureRequestAll (QueryAllKillSignatureRequestRequest) returns (QueryAllKillSignatureRequestResponse) {
+    option (google.api.http).get = "/eightball/eightball/kill_signature_request";
+  
+  }
+  
+  // Queries a list of EncryptedMagicKeyShare items.
+  rpc EncryptedMagicKeyShare    (QueryGetEncryptedMagicKeyShareRequest) returns (QueryGetEncryptedMagicKeyShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/encrypted_magic_key_share/{index}";
+  
+  }
+  rpc EncryptedMagicKeyShareAll (QueryAllEncryptedMagicKeyShareRequest) returns (QueryAllEncryptedMagicKeyShareResponse) {
+    option (google.api.http).get = "/eightball/eightball/encrypted_magic_key_share";
+  
+  }
+  
+  // Queries a list of EncryptedPreSign items.
+  rpc EncryptedPreSign    (QueryGetEncryptedPreSignRequest) returns (QueryGetEncryptedPreSignResponse) {
+    option (google.api.http).get = "/eightball/eightball/encrypted_pre_sign/{index}";
+  
+  }
+  rpc EncryptedPreSignAll (QueryAllEncryptedPreSignRequest) returns (QueryAllEncryptedPreSignResponse) {
+    option (google.api.http).get = "/eightball/eightball/encrypted_pre_sign";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetMagicKeyRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMagicKeyResponse {
+  MagicKey MagicKey = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMagicKeyRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMagicKeyResponse {
+  repeated MagicKey                               MagicKey   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetMagicKeySummoningRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMagicKeySummoningResponse {
+  MagicKeySummoning MagicKeySummoning = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMagicKeySummoningRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMagicKeySummoningResponse {
+  repeated MagicKeySummoning                      MagicKeySummoning = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination        = 2;
+}
+
+message QueryGetHighCouncilRequest {
+  uint64 id    = 1;
+  uint64 keyId = 2;
+}
+
+message QueryGetHighCouncilResponse {
+  HighCouncil HighCouncil = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHighCouncilRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                keyId      = 2;
+}
+
+message QueryAllHighCouncilResponse {
+  repeated HighCouncil                            HighCouncil = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination  = 2;
+}
+
+message QueryGetCurrentMagicKeyRequest {}
+
+message QueryGetCurrentMagicKeyResponse {
+  CurrentMagicKey CurrentMagicKey = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetHighCouncilConjuringsRequest {
+  uint64 id = 1;
+}
+
+message QueryGetHighCouncilConjuringsResponse {
+  HighCouncilConjurings HighCouncilConjurings = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHighCouncilConjuringsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHighCouncilConjuringsResponse {
+  repeated HighCouncilConjurings                  HighCouncilConjurings = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination            = 2;
+}
+
+message QueryGetSpiritConjuringPoemsRequest {
+  uint64 id      = 1;
+  uint64 magicId = 2;
+}
+
+message QueryGetSpiritConjuringPoemsResponse {
+  SpiritConjuringPoems SpiritConjuringPoems = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSpiritConjuringPoemsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                magicId    = 2;
+}
+
+message QueryAllSpiritConjuringPoemsResponse {
+  repeated SpiritConjuringPoems                   SpiritConjuringPoems = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination           = 2;
+}
+
+message QueryGetVerseRequest {
+  uint64 id         = 1;
+  uint64 magicKeyId = 2;
+}
+
+message QueryGetVerseResponse {
+  Verse Verse = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllVerseRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                magicKeyId = 2;
+}
+
+message QueryAllVerseResponse {
+  repeated Verse                                  Verse      = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryVerseCountRequest {
+  string magicKeyId = 1;
+}
+
+message QueryVerseCountResponse {
+  string count = 1;
+}
+
+message QueryMagicKeyCountRequest {}
+
+message QueryMagicKeyCountResponse {
+  uint64 count = 1;
+}
+
+message QueryGetVisionRequest {
+  uint64 id         = 1;
+  uint64 magicKeyId = 2;
+}
+
+message QueryGetVisionResponse {
+  Vision Vision = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllVisionRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                magicKeyId = 2;
+}
+
+message QueryAllVisionResponse {
+  repeated Vision                                 Vision     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetMessageRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMessageResponse {
+  Message Message = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMessageRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMessageResponse {
+  repeated Message                                Message    = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetSignatureRequestRequest {
+  uint64 id = 1;
+}
+
+message QueryGetSignatureRequestResponse {
+  SignatureRequest SignatureRequest = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSignatureRequestRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSignatureRequestResponse {
+  repeated SignatureRequest                       SignatureRequest = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination       = 2;
+}
+
+message QueryGetSignatureShareRequest {
+  uint64 messageId = 1;
+  uint64 id        = 2;
+}
+
+message QueryGetSignatureShareResponse {
+  SignatureShare SignatureShare = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSignatureShareRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                messageId  = 2;
+}
+
+message QueryAllSignatureShareResponse {
+  repeated SignatureShare                         SignatureShare = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination     = 2;
+}
+
+message QueryGetSignedMessageRequest {
+  uint64 id    = 1;
+  uint64 msgId = 2;
+}
+
+message QueryGetSignedMessageResponse {
+  SignedMessage SignedMessage = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSignedMessageRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                msgId      = 2;
+}
+
+message QueryAllSignedMessageResponse {
+  repeated SignedMessage                          SignedMessage = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+}
+
+message QueryGetMeditationSummoningRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMeditationSummoningResponse {
+  MeditationSummoning MeditationSummoning = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMeditationSummoningRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMeditationSummoningResponse {
+  repeated MeditationSummoning                    MeditationSummoning = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination          = 2;
+}
+
+message QueryGetMeditationRequest {
+  uint64 id         = 1;
+  uint64 magicKeyId = 2;
+}
+
+message QueryGetMeditationResponse {
+  Meditation Meditation = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMeditationRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64                                magicKeyId = 2;
+}
+
+message QueryAllMeditationResponse {
+  repeated Meditation                             Meditation = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryMeditationCountRequest {
+  uint64 magicKeyId = 1;
+}
+
+message QueryMeditationCountResponse {
+  string count = 1;
+}
+
+message QueryGetScriptureRequest {
+  string index = 1;
+}
+
+message QueryGetScriptureResponse {
+  Scripture scripture = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllScriptureRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllScriptureResponse {
+  repeated Scripture                              scripture  = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetScriptureSignatureRequestRequest {
+  uint64 id = 1;
+}
+
+message QueryGetScriptureSignatureRequestResponse {
+  ScriptureSignatureRequest ScriptureSignatureRequest = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllScriptureSignatureRequestRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllScriptureSignatureRequestResponse {
+  repeated ScriptureSignatureRequest              ScriptureSignatureRequest = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination                = 2;
+}
+
+message QueryGetScriptureSignatureShareRequest {
+  uint64 id             = 1;
+  string scriptureIndex = 2;
+}
+
+message QueryGetScriptureSignatureShareResponse {
+  ScriptureSignatureShare ScriptureSignatureShare = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllScriptureSignatureShareRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination     = 1;
+  string                                scriptureIndex = 2;
+}
+
+message QueryAllScriptureSignatureShareResponse {
+  repeated ScriptureSignatureShare                ScriptureSignatureShare = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination              = 2;
+}
+
+message QueryGetSignedScriptureRequest {
+  string index = 1;
+}
+
+message QueryGetSignedScriptureResponse {
+  SignedScripture signedScripture = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSignedScriptureRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSignedScriptureResponse {
+  repeated SignedScripture                        signedScripture = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+
+message QueryGetSignedScriptureListRequest {
+  uint64 id = 1;
+}
+
+message QueryGetSignedScriptureListResponse {
+  SignedScriptureList SignedScriptureList = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSignedScriptureListRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSignedScriptureListResponse {
+  repeated SignedScriptureList                    SignedScriptureList = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination          = 2;
+}
+
+// this line is used by starport scaffolding # 3
+message QueryGetBlessingRequest {
+  uint64 id    = 1;
+  string index = 2;
+}
+
+message QueryGetBlessingResponse {
+  Blessing Blessing = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBlessingRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string                                index      = 2;
+}
+
+message QueryAllBlessingResponse {
+  repeated Blessing                               Blessing   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetBlessingReceiptRequest {
+  string index = 1;
+}
+
+message QueryGetBlessingReceiptResponse {
+  BlessingReceipt blessingReceipt = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBlessingReceiptRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBlessingReceiptResponse {
+  repeated BlessingReceipt                        blessingReceipt = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+
+message QueryGetImploringRequest {
+  uint64 id = 1;
+}
+
+message QueryGetImploringResponse {
+  Imploring Imploring = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllImploringRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllImploringResponse {
+  repeated Imploring                              Imploring  = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetKillConjuringRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillConjuringResponse {
+  KillConjuring KillConjuring = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillConjuringRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillConjuringResponse {
+  repeated KillConjuring                          KillConjuring = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+}
+
+message QueryGetKillImploringRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillImploringResponse {
+  KillImploring KillImploring = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillImploringRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillImploringResponse {
+  repeated KillImploring                          KillImploring = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+}
+
+message QueryGetKillMeditationSummoningRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillMeditationSummoningResponse {
+  KillMeditationSummoning KillMeditationSummoning = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillMeditationSummoningRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillMeditationSummoningResponse {
+  repeated KillMeditationSummoning                KillMeditationSummoning = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination              = 2;
+}
+
+message QueryGetKillMagicKeySummoningRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillMagicKeySummoningResponse {
+  KillMagicKeySummoning KillMagicKeySummoning = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillMagicKeySummoningRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillMagicKeySummoningResponse {
+  repeated KillMagicKeySummoning                  KillMagicKeySummoning = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination            = 2;
+}
+
+message QueryGetKillScriptureSignatureRequestRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillScriptureSignatureRequestResponse {
+  KillScriptureSignatureRequest KillScriptureSignatureRequest = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillScriptureSignatureRequestRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillScriptureSignatureRequestResponse {
+  repeated KillScriptureSignatureRequest          KillScriptureSignatureRequest = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination                    = 2;
+}
+
+message QueryGetKillSignatureRequestRequest {
+  uint64 id = 1;
+}
+
+message QueryGetKillSignatureRequestResponse {
+  KillSignatureRequest KillSignatureRequest = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllKillSignatureRequestRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllKillSignatureRequestResponse {
+  repeated KillSignatureRequest                   KillSignatureRequest = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination           = 2;
+}
+
+message QueryGetEncryptedMagicKeyShareRequest {
+  string index = 1;
+}
+
+message QueryGetEncryptedMagicKeyShareResponse {
+  EncryptedMagicKeyShare encryptedMagicKeyShare = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEncryptedMagicKeyShareRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEncryptedMagicKeyShareResponse {
+  repeated EncryptedMagicKeyShare                 encryptedMagicKeyShare = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination             = 2;
+}
+
+message QueryGetEncryptedPreSignRequest {
+  string index = 1;
+}
+
+message QueryGetEncryptedPreSignResponse {
+  EncryptedPreSign encryptedPreSign = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEncryptedPreSignRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEncryptedPreSignResponse {
+  repeated EncryptedPreSign                       encryptedPreSign = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination       = 2;
+}
+
